@@ -31,10 +31,14 @@ module ArrayStats
     if self.length == 0
       return nil
     elsif rank.fractional_part?
-      sample_0 = sorted_array[rank.truncate - 1]
-      sample_1 = sorted_array[rank.truncate]
+      if rank > self.length
+        return self.last
+      else
+        sample_0 = sorted_array[rank.truncate - 1]
+        sample_1 = sorted_array[rank.truncate]
 
-      return (rank.fractional_part * (sample_1 - sample_0)) + sample_0
+        return (rank.fractional_part * (sample_1 - sample_0)) + sample_0
+      end
     else
       return sorted_array[rank - 1]
     end    
